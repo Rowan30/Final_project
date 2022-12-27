@@ -107,7 +107,7 @@ void game(){
         }
         scanf("%s",move);
         //undo
-        if(move[0]=='u'&&turn>0&&f>0){
+       if(move[0]=='u'&&turn>0&&f>0){
             system("cls");
             board[row][correct_move-1]=' ';
             correct_move=undo[--f];
@@ -686,23 +686,23 @@ int Hcheck(int x,int y,char board[x][y],int row,int move){
     int count=0;
     int score=0;
     for(int i=0;i<x;i++){
-        for(int j=0;j<y;j++){
-                if(board[i][j]==board[i][j+1]&&board[i][j]==board[row][move]){
-                    for(int k=j;k<j+3;k++){
+        for(int j=0;j<(y-3);j++){
+            if(board[i][j]==board[i][j+1]&&board[i][j]==board[row][move]){
+                for(int k=j;k<j+3;k++){
                         if(board[i][k]==board[i][k+1]){
                             count++;
                             if(k+2!=y-1 && board[i][k+2]==' '&&board[i+1][k+2]!=' '&& count<3) ai[0]=k+2;
                             else ai[4]=k-2;
                         }else{
-                            count=0;
-                            break;
-                        }
-                    }
-                    if(count==3){
-                        score++;
                         count=0;
-                    }
+                        break;
+                        }
                 }
+                if(count==3){
+                    score++;
+                    count=0;
+                }
+            }
         }
     }
     return score;
@@ -711,27 +711,28 @@ int Hcheck(int x,int y,char board[x][y],int row,int move){
 int Vcheck(int x,int y,char board[x][y],int row,int move){
     int count=0;
     int score=0;
-    for(int i=0;i<y;i++){
-            for(int j=0;j<x;j++){
-                if(board[j][i]==board[j+1][i]&&board[j][i]==board[row][move]){
-                    for(int k=j;k<j+3;k++){
-                        if(board[k][i]==board[k+1][i]){
+    for(int i=0;i<x;i++){
+        for(int j=0;j<y;j++){
+            if(board[i][j]==board[i+1][j]&&board[i][j]==board[row][move]){
+                for(int k=i;k<i+3;k++){
+                        if(board[k][j]==board[k+1][j]){
                             count++;
-                            if(board[j-1][i]==' '&& count==2)
+                              if(board[j-1][i]==' '&& count==2){
                             if(ai[1]==-1){
                                 ai[1]=i;
                             }else ai[2]=i;
+                              }
                         }else{
-                            count=0;
-                            break;
+                        count=0;
+                        break;
                         }
-                    }
-                    if(count==3){
+                }
+                if(count==3){
                     score++;
                     count=0;
-                    }
                 }
             }
+        }
     }
     return score;
 }
