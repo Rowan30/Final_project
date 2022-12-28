@@ -181,6 +181,9 @@ void game(){
     }
     if(player1.score>player2.score){
             printf("\nplayer1, please enter your name:\n");
+            Beep(467,1500);
+            Beep(526,1500);
+            Beep(624,1500);
             fflush(stdin);
             gets(player1.name);
             fflush(stdin);
@@ -197,6 +200,9 @@ void game(){
             sort_top(player1.name,player1.score);
     }else if(player2.score>player1.score){
             printf("\nplayer2, please enter your name:\n");
+            Beep(467,1500);
+            Beep(526,1500);
+            Beep(624,1500);
             fflush(stdin);
             gets(player2.name);
             fflush(stdin);
@@ -358,6 +364,9 @@ void computerEasy(){
     print(x,y,board);
     if(player1.score>compScore){
         printf("\nplayer1, please enter your name:\n");
+        Beep(467,1500);
+        Beep(526,1500);
+        Beep(624,1500);
         fflush(stdin);
         gets(player1.name);
         fflush(stdin);
@@ -551,6 +560,9 @@ void computermed(){
     print(x,y,board);
     if(player1.score>compScore){
         printf("\nplayer1, please enter your name:\n");
+        Beep(467,1500);
+        Beep(526,1500);
+        Beep(624,1500);
         fflush(stdin);
         gets(player1.name);
         fflush(stdin);
@@ -597,12 +609,16 @@ void menu(){
     char choice1,choice2,choice3;
     FILE *fp_in; //pointer to top player's file
     printf("a)Start a new game\n");
+    Beep(467,500);
     lines();
     printf("b)Load a game\n");
+    Beep(526,500);
     lines();
     printf("c) Top players\n");
+    Beep(624,500);
     lines();
     printf("d)Quit \n");
+    Beep(314,500);
     lines();
     printf("e)Help!\n");
     scanf("%c",&choice1);
