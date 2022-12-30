@@ -6,6 +6,7 @@
 #include <time.h>
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_YELLOW  "\x1b[33m"
+#define COLOR_BOLD  "\e[1m"
 //structure for players
 typedef struct{
     char name[30];
@@ -82,17 +83,17 @@ void print(int x,int y,char board[x][y]){
             //printf("\n---------\n");
             printf("\n");
             for(int u=0;u<(y*2.1);u++){
-                printf("-");
+                printf(COLOR_BOLD"-");
             }
             printf("\n");
             for(int m=0;m<y;m++){
                 if(m==y-1){
-                    printf("|");
+                    printf(COLOR_BOLD"|");
                     printf("%c",board[k][m]);
-                    printf("|");
+                    printf(COLOR_BOLD"|");
                 }
                 else{
-                    printf("|");
+                    printf(COLOR_BOLD"|");
                     printf("%c",board[k][m]);
                 }
             }
@@ -203,6 +204,7 @@ void game(){
        } else{
                 correct_move=check_number(move);
                 while(correct_move<1 || correct_move>y ){
+                        Beep(523,800);
                     printf("WRONG INPUT, TRY AGAIN\n");
                     scanf("%s",move);
                     correct_move=check_number(move);
@@ -233,6 +235,7 @@ void game(){
                     system("cls");
                 }
                 else{
+                        Beep(523,800);
                     printf("PLACE OCCUPIED, TRY AGAIN\n");
                     i--;
                     v=0;
@@ -408,6 +411,7 @@ void computerEasy(){
                     else{
                         correct_move=check_number(move);
                         while(correct_move<1 || correct_move>y ){
+                                 Beep(523,800);
                             printf("WRONG INPUT, TRY AGAIN\n");
                             scanf("%s",move);
                             correct_move=check_number(move);
@@ -453,6 +457,7 @@ void computerEasy(){
                 v=0;
             }
             else{
+                    Beep(523,800);
                 printf("PLACE OCCUPIED, TRY AGAIN\n");
                 i--;
                 sleep(1);
@@ -609,6 +614,7 @@ void computermed(){
                     else{
                         correct_move=check_number(move);
                         while(correct_move<1 || correct_move>y ){
+                                Beep(523,800);
                             printf("WRONG INPUT, TRY AGAIN\n");
                             scanf("%s",move);
                             correct_move=check_number(move);
@@ -665,6 +671,7 @@ void computermed(){
                 v=0;
             }
             else{
+                    Beep(523,800);
                 printf("PLACE OCCUPIED, TRY AGAIN\n");
                 i--;
                 sleep(1);
@@ -725,22 +732,22 @@ void computermed(){
 void menu(){
     //function to start a game
     //system("color 3c");
-    printf("                         WELCOME TO CONNECT FOUR\n");
+    printf(COLOR_BOLD"                         WELCOME TO CONNECT FOUR\n");
     char choice1,choice2,choice3,save;
     FILE *fp_in; //pointer to top player's file
-    printf("a)Start a new game\n");
+    printf(COLOR_BOLD"a)Start a new game\n");
      Beep(467,500);
     lines();
-    printf("b)Load a game\n");
+    printf(COLOR_BOLD"b)Load a game\n");
      Beep(526,500);
     lines();
-    printf("c) Top players\n");
+    printf(COLOR_BOLD"c)Top players\n");
        Beep(624,500);
     lines();
-    printf("d)Quit \n");
+    printf(COLOR_BOLD"d)Quit \n");
     Beep(314,500);
     lines();
-    printf("e)Help!\n");
+    printf(COLOR_BOLD"e)Help!\n");
     scanf("%c",&choice1);
     fflush(stdin);
     switch(choice1){
@@ -1283,6 +1290,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
         else{
                 correct_move=check_number(move);
                 while(correct_move<1 || correct_move>y ){
+                        Beep(523,800);
                     printf("WRONG INPUT, TRY AGAIN\n");
                     scanf("%s",move);
                     correct_move=check_number(move);
@@ -1313,6 +1321,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
                     system("cls");
                 }
                 else{
+                    Beep(523,800);
                     printf("PLACE OCCUPIED, TRY AGAIN\n");
                     i--;
                     v=0;
@@ -1527,6 +1536,7 @@ void playsavedcompu(int x,int y,char board[x][y],int turn,int score1,int score2)
                     else{
                         correct_move=check_number(move);
                         while(correct_move<1 || correct_move>y ){
+                                Beep(523,800);
                             printf("WRONG INPUT, TRY AGAIN\n");
                             scanf("%s",move);
                             correct_move=check_number(move);
@@ -1572,6 +1582,7 @@ void playsavedcompu(int x,int y,char board[x][y],int turn,int score1,int score2)
                 v=0;
             }
             else{
+                    Beep(523,800);
                 printf("PLACE OCCUPIED, TRY AGAIN\n");
                 i--;
                 sleep(1);
