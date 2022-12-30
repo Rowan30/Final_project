@@ -42,7 +42,7 @@ int main(){
             for(int i=1;i<=2;i++){
                     fflush(stdin);
                     printf("Please enter a correct path\n");
-                    scanf("%s",&str);
+                    gets(str);
                     readxml(str,2);
                     if(!(height<1||width<1||highscores<1)) break;
             }
