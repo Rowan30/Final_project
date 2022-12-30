@@ -62,6 +62,7 @@ void readxml(char str[30],int trial){
     if(trial==1){
         xml=fopen("config.xml","r");
         //C:/Code Blocks/config.xml
+        //C:\Code Blocks\config.xml
     }
     else{
         xml=fopen(str,"r");
@@ -200,7 +201,7 @@ void game(){
         }
         else if(move[0]=='e'){
             system("cls");
-          break;
+            break;
        } else{
                 correct_move=check_number(move);
                 while(correct_move<1 || correct_move>y ){
@@ -307,6 +308,7 @@ void computerEasy(){
     int correct_move=0;
     char choice;
     player player1;
+    player1.score=0;
     clock_t t1,t2;
     double t3=0;
     int undo[1000]={0};
@@ -334,6 +336,7 @@ void computerEasy(){
                 printf("Computer's Score=%d\n",compScore);
                 printf("Press 'u' for undo\n");
                 printf("Press 'r' for redo\n");
+                printf("Press 'e' to exit game without saving\n");
                 printf("time from starting the game=%d:%d\n",(int)t3/60,(int)t3%60);
                 printf("%s",COLOR_RED);
                 scanf("%s",move);
@@ -380,7 +383,12 @@ void computerEasy(){
                     t2=clock();
                     t3=t3+((t2-t1)/(double)CLOCKS_PER_SEC);
                     continue;
-                    }else{
+                    }
+                    else if(move[0]=='e'){
+                            system("cls");
+                            break;
+                    }
+                    else{
                         correct_move=check_number(move);
                         while(correct_move<1 || correct_move>y ){
                             printf("WRONG INPUT, TRY AGAIN\n");
@@ -489,12 +497,12 @@ void computermed(){
     int correct_move=0;
     char choice;
     player player1;
+    player1.score=0;
     clock_t t1,t2;
     double t3=0;
     int undo[1000]={0};
     int undo1[1000]={0};
     int turn=0,v=0,f=0,k=0,row=0,compScore=0;
-    //read from xml
     int x=height;
     int y=width;
     int vacant[y];
@@ -505,7 +513,6 @@ void computermed(){
             vacant[i]=0;
         }
     }
-    //print(x,y,board);
     for(int i=1;i<=(x*y);i++){
             system("cls");
             t1=clock();
@@ -516,6 +523,7 @@ void computermed(){
                 printf("Computer's Score=%d\n",compScore);
                 printf("Press 'u' for undo\n");
                 printf("Press 'r' for redo\n");
+                printf("Press 'e' to exit game without saving\n");
                 printf("time from starting the game=%d:%d\n",(int)t3/60,(int)t3%60);
                 printf("%s",COLOR_RED);
                 scanf("%s",move);
@@ -565,7 +573,12 @@ void computermed(){
                     t2=clock();
                     t3=t3+((t2-t1)/(double)CLOCKS_PER_SEC);
                     continue;
-                    }else{
+                    }
+                    else if(move[0]=='e'){
+                            system("cls");
+                            break;
+                    }
+                    else{
                         correct_move=check_number(move);
                         while(correct_move<1 || correct_move>y ){
                             printf("WRONG INPUT, TRY AGAIN\n");
@@ -586,8 +599,8 @@ void computermed(){
                         }
                     }
                     if(c==0){
-                            srand(time(NULL));
-                            correct_move=1+rand()%(y-2);
+                            //srand(time(NULL));
+                            //correct_move=1+rand()%(y-2);
                             if(vacant[correct_move-1]==x){
                                     for(int r=0;r<y;r++){
                                         if(vacant[r]<x){
@@ -750,7 +763,15 @@ void menu(){
         case'c':
             system("cls");
             //function for top players
+            char choice;
             show_scores();
+            fflush(stdin);
+            printf("\na)Main Menu\n");
+            lines();
+            printf("b)Exit\n");
+            scanf("%c",&choice);
+            fflush(stdin);
+            game_end(choice);
             break;
         case'd':
             system("cls");
@@ -759,12 +780,24 @@ void menu(){
             break;
         case'e':
             system("cls");
-            printf("the goal of the game is to connect four discs horizontally,vertically OR diagonally,the game ends when the board is full\n");
-            printf("we check the score of each player,\n");
-            printf("and the player with the higher score is considered as the winner\n");
-            sleep(1);
-            menu();
+            printf("The goal of the game is to connect four discs horizontally,vertically OR diagonally\n");
+            printf("The game ends when the board is full\n");
+            printf("The score of each player is checked and updated during each turn\n");
+            printf("The player with the higher score is considered the winner\n");
+            printf("\n To play, just enter the number of column you want to book\n");
+            printf("\n\t\t\t\t\t\t  GOOD LUCK\n");
+            printf("\t\t\t\t\tMAY THE ODDS BE ON YOUR FAVOR\n");
+
+            char choice1;
+            fflush(stdin);
+            printf("\na)Main Menu\n");
+            lines();
+            printf("b)Exit\n");
+            scanf("%c",&choice1);
+            fflush(stdin);
+            game_end(choice1);
             break;
+
             default:
             system("cls");
             printf("not available choice,TRY AGAIN");
@@ -787,7 +820,8 @@ int Hcheck(int x,int y,char board[x][y],int row,int move){
                         if(board[i][k]==board[i][k+1]){
                             count++;
                             if(k+2!=y-1 && board[i][k+2]==' '&&board[i+1][k+2]!=' '&& count<3) ai[0]=k+2;
-                            else ai[4]=k-2;
+                            else if(k+2==y-1 && board[i][k+2]==' '&&i==x-1&& count<3) ai[0]=k-1;
+                            else if(k+2==y-1 && board[i][k+2]==' '&&board[i+1][k+2]!=' '&& count<3) ai[0]=k-2;
                         }else{
                             count=0;
                             break;
