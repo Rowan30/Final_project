@@ -134,7 +134,7 @@ void game(){
     for(int i=1;i<=(x*y);i++){
         t1=clock();
         if(turn%2==0){
-            printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+            printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
             printf("score1=%d\n",player1.score);
             printf("score2=%d\n",player2.score);
             printf("Press 'u' for undo,'r' for redo\n");
@@ -143,7 +143,7 @@ void game(){
             printf("%s",COLOR_RED);
         }
         else{
-            printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+            printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
             printf("score1=%d\n",player1.score);
             printf("score2=%d\n",player2.score);
             printf("Press 'u' for undo,'r' for redo\n");
@@ -200,6 +200,7 @@ void game(){
         }
         else if(move[0]=='e'){
             system("cls");
+            saved=1;
             break;
        } else{
                 correct_move=check_number(move);
@@ -259,7 +260,7 @@ void game(){
 
     }
     else if(player1.score>player2.score){
-            printf("\nplayer1, please enter your name:\n");
+            printf("\nRowan1, please enter your name:\n");
             Beep(467,1500);
             Beep(526,1500);
             fflush(stdin);
@@ -277,7 +278,7 @@ void game(){
             fflush(stdin);
             game_end(choice);
     }else if(player2.score>player1.score){
-            printf("\nplayer2, please enter your name:\n");
+            printf("\nRowan2, please enter your name:\n");
             Beep(467,1500);
             Beep(526,1500);
             fflush(stdin);
@@ -390,6 +391,7 @@ void computerEasy(){
                     }
                     else if(move[0]=='e'){
                             system("cls");
+                            saved=1;
                             break;
                     }
                     else if(move[0]=='s'){
@@ -480,7 +482,7 @@ void computerEasy(){
         fflush(stdin);
     }
     else if(player1.score>compScore){
-        printf("\nplayer1, please enter your name:\n");
+        printf("\nRowan1, please enter your name:\n");
         Beep(467,1500);
         Beep(526,1500);
         fflush(stdin);
@@ -526,6 +528,7 @@ void computermed(){
     for(int i=0;i<4;i++){
         ai[i]=-1;
     }
+    int saved=0;
     char move[20];
     int correct_move=0;
     char choice;
@@ -551,8 +554,8 @@ void computermed(){
             t1=clock();
             print(x,y,board);
             if(turn%2==0){
-                printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
-                printf("Player's Score=%d\n",player1.score);
+                printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+                printf("Rowan's Score=%d\n",player1.score);
                 printf("Computer's Score=%d\n",compScore);
                 printf("Press 'u' for undo\n");
                 printf("Press 'r' for redo\n");
@@ -609,6 +612,7 @@ void computermed(){
                     }
                     else if(move[0]=='e'){
                             system("cls");
+                            saved=1;
                             break;
                     }
                     else{
@@ -682,8 +686,19 @@ void computermed(){
     }
     system("cls");
     print(x,y,board);
-    if(player1.score>compScore){
-        printf("\nplayer1, please enter your name:\n");
+    if(saved==1){
+        system("cls");
+        fflush(stdin);
+        printf("a)Main Menu\n");
+        lines();
+        printf("b)Exit\n");
+        scanf("%c",&choice);
+        fflush(stdin);
+        game_end(choice);
+        fflush(stdin);
+    }
+    else if(player1.score>compScore){
+        printf("\nRowan1, please enter your name:\n");
         Beep(467,1500);
         Beep(526,1500);
         fflush(stdin);
@@ -1218,7 +1233,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
     for(int i=turn+1;i<=(x*y);i++){
         t1=clock();
         if(turn%2==0){
-            printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+            printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
             printf("score1=%d\n",player1.score);
             printf("score2=%d\n",player2.score);
             printf("Press 'u' for undo,'r' for redo\n");
@@ -1227,7 +1242,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
             printf("%s",COLOR_RED);
         }
         else{
-            printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+            printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
             printf("score1=%d\n",player1.score);
             printf("score2=%d\n",player2.score);
             printf("Press 'u' for undo,'r' for redo\n");
@@ -1285,7 +1300,8 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
         else if(move[0]=='e'){
             system("cls");
             fflush(stdin);
-           break;
+            saved=1;
+            break;
         }
         else{
                 correct_move=check_number(move);
@@ -1344,7 +1360,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
         fflush(stdin);
     }
     else if(player1.score>player2.score){
-            printf("\nplayer1, please enter your name:\n");
+            printf("\nRowan1, please enter your name:\n");
             Beep(467,1500);
             Beep(526,1500);
             Beep(624,1500);
@@ -1363,7 +1379,7 @@ void playsaved(int x,int y,char board[x][y],int turn,int score1,int score2){
             }
             sort_top(player1.name,player1.score);
     }else if(player2.score>player1.score){
-            printf("\nplayer2, please enter your name:\n");
+            printf("\nRowan2, please enter your name:\n");
             Beep(467,1500);
             Beep(526,1500);
             Beep(624,1500);
@@ -1461,8 +1477,8 @@ void playsavedcompu(int x,int y,char board[x][y],int turn,int score1,int score2)
             t1=clock();
             print(x,y,board);
             if(turn%2==0){
-                printf("\nPlayer %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
-                printf("Player's Score=%d\n",player1.score);
+                printf("\nRowan %d's turn\nNumber of moves made: %d\n",turn%2+1,turn/2);
+                printf("Rowan's Score=%d\n",player1.score);
                 printf("Computer's Score=%d\n",compScore);
                 printf("Press 'u' for undo,'r' for redo\n");
                 printf("Press 's' to exit and save,'e' to exit game without saving\n");
@@ -1515,6 +1531,7 @@ void playsavedcompu(int x,int y,char board[x][y],int turn,int score1,int score2)
                     }
                     else if(move[0]=='e'){
                             system("cls");
+                            saved=1;
                             break;
                     }
                     else if(move[0]=='s'){
@@ -1605,7 +1622,7 @@ void playsavedcompu(int x,int y,char board[x][y],int turn,int score1,int score2)
         fflush(stdin);
     }
     else if(player1.score>compScore){
-        printf("\nplayer1, please enter your name:\n");
+        printf("\nRowan1, please enter your name:\n");
         Beep(467,1500);
         Beep(526,1500);
         fflush(stdin);
